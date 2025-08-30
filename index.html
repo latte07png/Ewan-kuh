@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Songs That I Dedicate To You</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffb6c1, #ffe6f0, #a5c9ff);
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      transition: background 0.8s ease;
+    }
+
+    .container {
+      text-align: center;
+      width: 90%;
+      max-width: 700px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    }
+
+    .question, .playlist {
+      display: none;
+    }
+
+    .question.active {
+      display: block;
+    }
+
+    .playlist.active {
+      display: block;
+    }
+
+    .choices button {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin: 10px auto;
+      padding: 15px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 15px;
+      background: #fff;
+      color: #444;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    .choices button:hover {
+      transform: scale(1.05);
+      background: #fce4ec;
+    }
+
+    .playlist {
+      margin-top: 20px;
+    }
+
+    .song-card {
+      width: 350px;
+      height: 160px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.5s ease;
+      padding: 20px;
+      margin: 0 auto;
+    }
+
+    .song-card h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    .song-card p {
+      margin: 8px 0 0;
+      font-size: 1rem;
+      color: #777;
+    }
+
+    .arrow {
+      font-size: 2.5rem;
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
+      margin: 0 20px;
+      transition: transform 0.2s ease;
+    }
+
+    .arrow:hover {
+      transform: scale(1.2);
+    }
+
+    .playlist-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Question Part -->
+    <div class="question active" id="questionBox">
+      <h1>Para saan nga ba 'to?</h1>
+      <div class="choices">
+        <button onclick="showAnswer()">1. Hindi ko alam</button>
+        <button onclick="showAnswer()">2. Hindi ko parin alam</button>
+      </div>
+    </div>
+
+    <!-- Playlist Part -->
+    <div class="playlist" id="playlistBox">
+      <h1>🎶 Songs That I Dedicate To You 🎶</h1>
+      <div class="playlist-controls">
+        <div class="arrow" onclick="prevSong()">&#9664;</div>
+        <div class="song-card" id="songCard">
+          <h2>You!</h2>
+          <p>LANY</p>
+        </div>
+        <div class="arrow" onclick="nextSong()">&#9654;</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const songs = [
+      { title: "You!", artist: "LANY" },
+      { title: "Anything 4 U", artist: "LANY" },
+      { title: "ILYSB", artist: "LANY" },
+      { title: "Out of My League", artist: "LANY" },
+      { title: "Pink Skies", artist: "LANY" },
+      { title: "Iraya", artist: "Just Hush" },
+      { title: "Sa'yo", artist: "Silent Sanctuary" },
+      { title: "Kusapiling", artist: "Anthony Meneses" },
+      { title: "Paruparo", artist: "Sugarcane" }
+    ];
+
+    let currentIndex = 0;
+    const songCard = document.getElementById("songCard");
+    const questionBox = document.getElementById("questionBox");
+    const playlistBox = document.getElementById("playlistBox");
+
+    function updateSong() {
+      songCard.innerHTML = `
+        <h2>${songs[currentIndex].title}</h2>
+        <p>${songs[currentIndex].artist}</p>
+      `;
+    }
+
+    function prevSong() {
+      currentIndex = (currentIndex - 1 + songs.length) % songs.length;
+      updateSong();
+    }
+
+    function nextSong() {
+      currentIndex = (currentIndex + 1) % songs.length;
+      updateSong();
+    }
+
+    function showAnswer() {
+      alert("Ay ganon ba... okay fine eto na 💗");
+      questionBox.classList.remove("active");
+      playlistBox.classList.add("active");
+    }
+  </script>
+</body>
+</html>
